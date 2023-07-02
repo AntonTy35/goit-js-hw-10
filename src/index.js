@@ -1,7 +1,6 @@
 // import axios from 'axios';
 
-import { fetchBreeds } from '../src/cat-api';
-import { fetchCatByBreed } from '../src/cat-api';
+import { fetchBreeds, fetchCatByBreed } from '../src/cat-api';
 
 // axios.defaults.headers.common['x-api-key'] = X_API_KEY;
 
@@ -38,11 +37,18 @@ function createOptionMarkup(arrName) {
 }
 
 function onChange() {
+  catInfo.style.display = 'none';
   fetchCatByBreed(breedSelect.value)
     .then(obj => {
-      catInfo.innerHTML = createCatInfoMarkup(obj[0]);
+      loader.style.display = 'block';
+      setTimeout(() => {
+        loader.style.display = 'none';
+        catInfo.innerHTML = createCatInfoMarkup(obj[0]);
+        catInfo.style.display = 'flex';
+      }, '500');
     })
     .catch(err => {
+      error.style.display = 'block';
       console.log('Failure', err);
     });
 }
