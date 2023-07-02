@@ -38,16 +38,16 @@ function createOptionMarkup(arrName) {
 
 function onChange() {
   catInfo.style.display = 'none';
+  error.style.display = 'none';
+
   fetchCatByBreed(breedSelect.value)
     .then(obj => {
-      loader.style.display = 'block';
-      setTimeout(() => {
-        loader.style.display = 'none';
-        catInfo.innerHTML = createCatInfoMarkup(obj[0]);
-        catInfo.style.display = 'flex';
-      }, '500');
+      loader.style.display = 'none';
+      catInfo.innerHTML = createCatInfoMarkup(obj[0]);
+      catInfo.style.display = 'flex';
     })
     .catch(err => {
+      loader.style.display = 'none';
       error.style.display = 'block';
       console.log('Failure', err);
     });
