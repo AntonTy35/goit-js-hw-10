@@ -12,8 +12,6 @@ error.style.color = 'red';
 catInfo.style.display = 'flex';
 catInfo.style.gap = '20px';
 
-breedSelect.addEventListener('change', onChange);
-
 fetchBreeds()
   .then(data => {
     loader.style.display = 'none';
@@ -31,6 +29,8 @@ function createOptionMarkup(arrName) {
     .map(({ id, name }) => `<option value="${id}">${name}</option>`)
     .join('');
 }
+
+breedSelect.addEventListener('change', onChange);
 
 function onChange() {
   catInfo.style.display = 'none';
